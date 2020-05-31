@@ -9,6 +9,7 @@ class FileManager:
     def __init__(self):
         self.setting = {}
         self.FileNumbers = {}
+        self.ChooseFile = 1
 
     # 读取.FMSetting文件并把内容转换成字典
     def read_setting(self, SettingFile="/home/.FMSetting"):
@@ -31,8 +32,8 @@ class FileManager:
         else:
             print("没有找到.FMSetting文件")
 
-    # 打印路径下所有文件/文件夹<F8>
-    def print_file(self, ChooseFile=1, path=os.getcwd()):
+    # 设置文件数字编号
+    def set_file_number(self, path=os.getcwd()):
         # 获取路径所有文件/文件夹
         AllFile = os.listdir(path)
         # 所有文件
@@ -41,11 +42,41 @@ class FileManager:
         n = 1
         # 打印路径所有文件
         for i in AllFile:
-            # 如果是文件夹则打印棕色字体，
+            # 如果是文件夹就打印
             if os.path.isdir(i):
-                print(f"\033[0;33;48m {n} {i}")
+                # 并且文件夹数量加1
+                self.FileNumbers[i] = n
+                n += 1
+            # 如果是文件则储存在列表里
+            else:
+                files.append(i)
+
+        for j in range(len(files)):
+            # 对应编号添加在FileNumbers字典里
+            self.FileNumbers[files[j]] = j+n
+        # print(self.FileNumbers)
+        
+    # 打印路径下所有文件/文件夹
+    def print_file(self, ChooseFile=1, path=os.getcwd()):
+        os.system("clear")
+        # 获取路径所有文件/文件夹
+        AllFile = os.listdir(path)
+        # 所有文件
+        files = []
+        # 文件夹数量
+        n = 1
+        # 打印路径所有文件
+        for i in AllFile:
+            # 如果是文件夹就打印
+            if os.path.isdir(i):
+                # 如果是选中状态则打印蓝色
+                if self.FileNumbers.get(i) == ChooseFile:
+                    print(f"\033[0;36;48m {n} {i}")
+                # 否则打印棕色
+                else:
+                    print(f"\033[0;33;48m {n} {i}")
                 # 对应编号添加在FileNumbers字典里
-                self.FileNumbers[n] = i
+                self.FileNumbers[i] = n
                 # 并且文件夹数量加1
                 n += 1
 
@@ -53,15 +84,21 @@ class FileManager:
             else:
                 files.append(i)
 
-        # 所有文件夹打印完后打印文件 白色字体
+        # 所有文件夹打印完后打印文件
         for j in range(len(files)):
-            print(f"\033[0;37;48m {j+n} {files[j]}")
+            # 如果是选中状态则打印蓝色
+            if self.FileNumbers.get(files[j]) == ChooseFile:
+                print(f"\033[0;36;48m {j+n} {files[j]}")
+            # 否则白色
+            else:
+                print(f"\033[0;37;48m {j+n} {files[j]}")
             # 对应编号添加在FileNumbers字典里
-            self.FileNumbers[j+n] = files[j]
+            self.FileNumbers[files[j]] = j+n
+        # print(self.FileNumbers)
+        # print(ChooseFile)
 
     # 选择文件/文件夹
-    def choose_file(self, ChooseFile=1):
-        # print(self.FileNumbers)
+    def choose_file(self):
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
         try:
@@ -71,18 +108,21 @@ class FileManager:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
         if ch == 'j':
-            ChooseFile -= 1
+            self.ChooseFile -= 1
         elif ch == 'k':
-            ChooseFile += 1
+            self.ChooseFile += 1
+        elif ch == 'q':
+            sys.exit()
         else:
             pass
 
-        return ChooseFile
-
+        return self.ChooseFile
 
 if __name__ == '__main__':
     fm = FileManager()
-    fm.read_setting()
-    fm.print_file()
     os.system("clear")
-    fm.print_file(ChooseFile=fm.choose_file())
+    fm.read_setting()
+    fm.set_file_number()
+    fm.print_file()
+    while True:
+        fm.print_file(ChooseFile=fm.choose_file())
