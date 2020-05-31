@@ -84,5 +84,5 @@ if __name__ == '__main__':
     fm = FileManager()
     fm.read_setting()
     fm.print_file()
-    # os.system("clear")
+    os.system("clear")
     fm.print_file(ChooseFile=fm.choose_file())
