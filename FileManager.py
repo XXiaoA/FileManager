@@ -7,33 +7,28 @@ import termios
 
 class FileManager:
     def __init__(self):
-        self.setting = {}
+        self.setting = {'open':{}}
         self.FileNumbers = {}
         self.path = os.getcwd()
         self.AllFiles = os.listdir(self.path)
         self.AllFiles.insert(0, "..")
         self.ChooseFile = 1
 
-    # 读取.FMSetting文件并把内容转换成字典
-    def read_setting(self, SettingFile="/home/.FMSetting"):
+    # 读取.FMSetting.py文件并把内容添加到setting字典
+    def read_setting(self, SettingFile=os.path.expanduser('~')+"/FMSetting.py"):
         # 检测.FMSetting文件是否存在
         if os.path.exists(SettingFile):
-            # 存在则打开文件并读取内容
-            with open(SettingFile) as f:
-                text = f.readlines()
-                f.close()
-            # 去掉文件内容每行最后面的\n
-            text = [t.replace("\n", "") for t in text]
-            # 遍历文件内容
-            # 如果是set开头则把=前后的内容变成键值对添加进setting字典
-            for i in text:
-                if i[:3] == "set":
-                    i = re.split("[ =]", i)
-                    self.setting[i[-2]] = i[-1]
+            # 存在则打开文件并导入
+            sys.path.append(os.path.expanduser('~'))
+            import FMSetting as setting
+            # 把打开方式添加到self.setting
+            for open in setting.open:
+                self.setting['open'][open] = setting.open.get(open)
 
         # 文件不存在则提示，并且退出程序
         else:
-            print("⚠：没有找到.FMSetting文件，一些功能将无法正常使用")
+            print("⚠：没有找到FMSetting.py文件，一些功能将无法正常使用")
+        # print(self.setting)
 
     # 设置当前所在路径
     def set_allfiles(self, path):
@@ -146,6 +141,10 @@ class FileManager:
                     self.set_allfiles(FilePath)
                 self.ChooseFile = 1
                 self.print_file(self.ChooseFile)
+            else:
+                for open in self.setting['open'].keys():
+                    if os.path.splitext(FileName)[1][1:] in self.setting['open'].get(open):
+                        os.system(open+' '+FilePath)
         else:
             pass
 
