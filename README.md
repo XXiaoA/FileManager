@@ -30,5 +30,5 @@ open = {
 - 可以创建一个 ~/FileManager.sh 文件
 - 内容为 python ~/FileManager/v0.01/FileManager.py
 - 保存并退出
-- 终端输入 chmod -x ~/FileManager.sh; cp ~/FileManager.sh /usr/bin
-- 以后输入 FileManager.sh 既可以运行程序
+- 终端输入 chmod -x ~/FileManager.sh; cp ~/FileManager.sh /usr/bin; mv /usr/bin/FileManager.sh filemanager
+- 以后输入 filemanager 既可以运行程序

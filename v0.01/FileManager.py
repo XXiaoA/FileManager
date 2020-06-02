@@ -144,6 +144,7 @@ class FileManager:
             else:
                 for open in self.setting['open'].keys():
                     if os.path.splitext(FileName)[1][1:] in self.setting['open'].get(open):
+                        os.system("clear")
                         os.system(open+' '+FilePath)
         else:
             pass
