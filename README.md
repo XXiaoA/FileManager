@@ -6,8 +6,12 @@
 - **禁止用于一切不良用途**
 ---
 ## 使用教程  
-### 下载
-- git clone https://github.com/XXiaoA/FileManager ~/FileManager
+### 下载及运行
+在终端输入：  
+```
+cd ~; git clone https://github.com/XXiaoA/FileManager ; echo 'python ~/FileManager/v0.01/FileManager.py' >a.sh; chmod +x a.sh;mv a.sh filemanager;mv filemanager ~/../usr/bin  
+```
+等待程序下载完成，输入 *filemanager *即可运行
 ---
 ### 设置  
 1. 在~目录下创建FMSetting.py文件  
@@ -27,8 +31,5 @@ open = {
 - q/CTRL+c退出程序
 ---
 <u>提示：</u>
-- 可以创建一个 ~/FileManager.sh 文件
-- 内容为 python ~/FileManager/v0.01/FileManager.py
-- 保存并退出
-- 终端输入 chmod -x ~/FileManager.sh; cp ~/FileManager.sh /usr/bin; mv /usr/bin/FileManager.sh filemanager
+- 终端输入 git clone https://github.com/XXiaoA/FileManager ~/FileManager; echo 'python ~/FileManager/v0.01/FileManager.py' >~/FileManager.sh;  chmod -x ~/FileManager.sh; cp ~/FileManager.sh /usr/bin; mv /usr/bin/FileManager.sh filemanager
 - 以后输入 filemanager 既可以运行程序
