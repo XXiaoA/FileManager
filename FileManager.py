@@ -145,7 +145,9 @@ class FileManager:
                 for open in self.setting['open'].keys():
                     if os.path.splitext(FileName)[1][1:] in self.setting['open'].get(open):
                         os.system("clear")
-                        os.system(open+' '+FilePath)
+                        os.system(open.replace("%", FilePath))
+                        # print(open.replace("%", FilePath))
+                        # input()
         else:
             pass
 
