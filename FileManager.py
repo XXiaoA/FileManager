@@ -128,6 +128,7 @@ class FileManager:
             self.ChooseFile -= 1
         # q或CTRL+c退出
         elif ch == 'q' or ord(ch) == 0x3:
+            os.system("clear")
             sys.exit()
         # 空格进入文件夹/打开文件
         elif ch == ' ':
