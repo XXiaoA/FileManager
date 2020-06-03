@@ -2,7 +2,7 @@
 
 ## 说明:  
 - 目前只适配于Linux系统
-- 更不更新取决于~~作者懒不懒~~
+- ~~更不更新取决于作者懒不懒~~
 - **禁止用于一切不当用途**
 ---
 ## 使用教程  
@@ -11,7 +11,7 @@
 ```
 cd ~; git clone https://github.com/XXiaoA/FileManager ; echo 'python ~/FileManager/FileManager.py' >a.sh; chmod +x a.sh;mv a.sh filemanager;mv filemanager ~/../usr/bin  
 ```
-等待程序下载完成，输入***filemanager***即可运行
+等待程序下载完成，输入**filemanager**即可运行
 ---
 ### 设置  
 1. 在~目录下创建FMSetting.py文件  
