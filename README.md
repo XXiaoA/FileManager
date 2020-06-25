@@ -10,7 +10,12 @@
 ### 下载及运行
 在终端输入：  
 ```
-cd ~; git clone https://github.com/XXiaoA/FileManager ; echo 'python ~/FileManager/FileManager.py' >a.sh; chmod +x a.sh;mv a.sh filemanager;mv filemanager ~/../usr/bin  
+cd ~;\
+git clone https://github.com/XXiaoA/FileManager ;\ 
+echo 'python ~/FileManager/FileManager.py' >a.sh;\
+chmod +x a.sh;\
+mv a.sh filemanager;\
+mv filemanager ~/../usr/bin  
 ```
 等待程序下载完成，输入`filemanager`即可运行
 ---

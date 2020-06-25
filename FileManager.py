@@ -205,15 +205,15 @@ class FileManager:
                     os.system("clear")
                     os.system(
                         self.setting['OtherOpenCommand'].replace("%", FilePath))
-        elif ch == 'c':
+        # elif ch == 'c':
             # 文件(夹)名
-            FileName = {self.FileNumbers.get(i): i for i in self.FileNumbers.keys()}.get(self.SelectingFile[self.path])
+            # FileName = {self.FileNumbers.get(i): i for i in self.FileNumbers.keys()}.get(self.SelectingFile[self.path])
             # 文件(夹)绝对路径
-            FilePath = self.path+"/"+FileName
-            if FileName == '..':
-                self.prompt.append('不允许选择..文件夹')
-            else:
-                self.ChooseFileList.append(FilePath)
+            # FilePath = self.path+"/"+FileName
+            # if FileName == '..':
+                # self.prompt.append('不允许选择..文件夹')
+            # else:
+                # self.ChooseFileList.append(FilePath)
 
         else:
             pass
